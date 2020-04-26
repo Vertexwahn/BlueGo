@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Applications>
+
+<ApplicationInfo 
+Name="Intel Threading Building Blocks 4.4 Update 3" 
+DownloadUrl="https://www.threadingbuildingblocks.org/sites/default/files/software_releases/windows/tbb44_20160128oss_win.zip" 
+Description="" 
+Filename="tbb44_20160128oss_win.zip" 
+Platform="x64"
+IDE="vs2015"
+/> 
+
+<ApplicationInfo 
+Name="Qt5.5.1 Visual Studio 2015 x64" 
+DownloadUrl="https://www.cms.bgu.tum.de/oip/BlueGo/Qt5.5.1 Visual Studio 2015 x64.zip" 
+Description="" 
+Filename="Qt5.5.1 Visual Studio 2015 x64.zip" 
+Platform="x64"
+IDE="vs2015"
+/> 
+
+<ApplicationInfo 
+Name="ffmpeg-20151206-git-21fbc41-win64-dev" 
+DownloadUrl="https://www.cms.bgu.tum.de/oip/BlueGo/ffmpeg-20151206-git-21fbc41-win64-dev.zip" 
+Description="" 
+Filename="ffmpeg-20151206-git-21fbc41-win64-dev.zip" 
+Platform="x64"
+IDE="vs2015"
+/> 
+
+<ApplicationInfo 
+Name="assimp" 
+DownloadUrl="https://www.cms.bgu.tum.de/oip/BlueGo/assimp.zip" 
+Description="" 
+Filename="assimp.zip" 
+Platform="x64"
+IDE="vs2015"
+/> 
+
+<ApplicationInfo 
+Name="assimp" 
+DownloadUrl="https://www.cms.bgu.tum.de/oip/BlueGo/assimp.zip" 
+Description="" 
+Filename="assimp.zip" 
+Platform="x64"
+IDE="vs2013"
+/> 
+
+<ApplicationInfo 
+Name="ActivePerl-5.16.1.1601 x64" DownloadUrl="http://downloads.activestate.com/ActivePerl/releases/5.16.1.1601/ActivePerl-5.16.1.1601-MSWin32-x64-296175.msi" 
+Description="" 
+Filename="ActivePerl-5.16.1.1601-MSWin32-x64-296175.msi" 
+platform="x64"
+ide="none"
+/> 
+
+<ApplicationInfo Name="CMake 2.8.10.2" DownloadUrl="http://www.cmake.org/files/v2.8/cmake-2.8.10.2-win32-x86.exe" Description="" Filename="cmake-2.6.4-win32-x86.exe" />
+<ApplicationInfo Name="CUDA 5.0 Production Release Desktop" DownloadUrl="http://developer.download.nvidia.com/compute/cuda/5_0/rel-update-1/installers/cuda_5.0.35_winvista_win7_win8_general_64-1.msi" Description="" Filename="cuda_5.0.35_winvista_win7_win8_general_64-1.msi" />
+<ApplicationInfo Name="WinDirStat" DownloadUrl="http://windirstat.info/wds_current_setup.exe" Description="" Filename="wds_current_setup.exe" />
+<ApplicationInfo Name="Vissemee 0.1 [vsix package]" DownloadUrl="http://vissemee.googlecode.com/files/vissemee-v-0.1-final.vsix" Description="" Filename="vissemee-v-0.1-final.vsix" />
+<ApplicationInfo Name="Visual Leak Detector 2.2.3" DownloadUrl="http://download.codeplex.com/Download?ProjectName=vld&amp;DownloadId=342350&amp;FileTime=129737292918100000&amp;Build=18475" Description="" Filename="vld-2.2.3-setup.exe" />
+<ApplicationInfo Name="Doxygen 1.7.6.1" DownloadUrl="http://ftp.stack.nl/pub/users/dimitri/doxygen-1.7.6.1-setup.exe" Description="" Filename="doxygen-1.7.6.1-setup.exe" />
+<ApplicationInfo Name="Python 3.2.2 x64" DownloadUrl="http://www.python.org/ftp/python/3.2.2/python-3.2.2.amd64.msi" Description="" Filename="python-3.2.2.amd64.msi" />
+<ApplicationInfo Name="Strawberry Perl 5.14.3.1 (x64)" DownloadUrl="http://strawberry-perl.googlecode.com/files/strawberry-perl-5.14.3.1-64bit.msi" Description="" Filename="strawberry-perl-5.14.3.1-64bit.msi" />
+<ApplicationInfo Name="KeePass 2" DownloadUrl="http://downloads.sourceforge.net/keepass/KeePass-2.18-Setup.exe" Description="" Filename="KeePass-2.18-Setup.exe" />
+<ApplicationInfo Name="Notepad++" DownloadUrl="http://download.tuxfamily.org/notepadplus/5.9.8/npp.5.9.8.Installer.exe" Description="" Filename="npp.5.9.8.Installer.exe" />
+<ApplicationInfo Name="7zip" DownloadUrl="http://sourceforge.net/settings/mirror_choices?projectname=sevenzip&amp;filename=7-Zip/9.20/7z920.exe" Description="" Filename="7z920.exe" />
+<ApplicationInfo Name="Visual AssistX 1862" DownloadUrl="http://www.wholetomato.com/binaries/VA_X_Setup1862.exe" Description="" Filename="VA_X_Setup1862.exe" />
+<ApplicationInfo Name="DirectX SDK" DownloadUrl="http://www.microsoft.com/downloads/info.aspx?na=41&amp;srcfamilyid=3021d52b-514e-41d3-ad02-438a3ba730ba&amp;srcdisplaylang=en&amp;u=http%3a%2f%2fdownload.microsoft.com%2fdownload%2fA%2fE%2f7%2fAE743F1F-632B-4809-87A9-AA1BB3458E31%2fDXSDK_Jun10.exe" Description="" Filename="DXSDK_Jun10.exe" />
+<ApplicationInfo Name="Mercurial 2.0.2 with TortoiseHG 2.2.2 (x64)" DownloadUrl="http://cdn.bitbucket.org/tortoisehg/thg/downloads/tortoisehg-2.2.2-hg-2.0.2-x64.msi" Description="" Filename="tortoisehg-2.2.2-hg-2.0.2-x64.msi" />
+<ApplicationInfo Name="TortoiseSVN 1.7.4 (x64)" DownloadUrl="http://dfn.dl.sourceforge.net/project/tortoisesvn/1.7.4/Application/TortoiseSVN-1.7.4.22459-x64-svn-1.7.2.msi" Description="" Filename="TortoiseSVN-1.7.4.22459-x64-svn-1.7.2.msi" />
+<ApplicationInfo Name="Putty 0.62" DownloadUrl="http://the.earth.li/~sgtatham/putty/latest/x86/putty-0.62-installer.exe" Description="" Filename="putty-0.62-installer.exe" />
+<ApplicationInfo Name="Adobe Reader X (10.1.2)" DownloadUrl="http://aihdownload.adobe.com/bin/install_reader10_de_mssd_aih.exe" Description="" Filename="install_reader10_de_mssd_aih.exe" />
+<ApplicationInfo Name="Cinebench R11.5" DownloadUrl="http://http.maxon.net/pub/benchmarks/CINEBENCH_11.529.zip" Description="" Filename="CINEBENCH_11.529.zip" />
+<ApplicationInfo Name="pidgin" DownloadUrl="http://sourceforge.net/projects/pidgin/files/Pidgin/2.10.1/pidgin-2.10.1.exe" Description="Pidgin is an easy to use and free chat client used by millions. Connect to AIM, MSN, Yahoo, and more chat networks all at once." Filename="pidgin-2.10.1.exe" />
+<ApplicationInfo Name="Dropbox" DownloadUrl="http://cdn.dropbox.com/Dropbox%201.2.51.exe" Description="" Filename="Dropbox_201.2.51.exe" />
+</Applications>

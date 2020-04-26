@@ -1,0 +1,9 @@
+syntax: glob
+src/Testbed/obj/*
+src/BlueGo/obj/*
+src/BlueGo/bin/*
+src/.vs/BlueGo/v14/.suo
+src/BlueGo2/obj/*
+src/BlueGo2/bin/Debug/*
+src/BlueGo2/bin/Release/*
+src/.vs/BlueGo/v16/*

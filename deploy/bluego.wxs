@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<?define ProductVersion = "0.2.3"?>
+<?define ProductUpgradeCode = "12345678-1234-1234-1234-111111111115"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+   <Product Id="*" UpgradeCode="$(var.ProductUpgradeCode)" 
+            Name="BlueGo" Version="$(var.ProductVersion)" Manufacturer="Vertexwahn" Language="1033">
+      <Package InstallerVersion="200" Compressed="yes" Comments="Windows Installer Package"/>
+      <Media Id="1" Cabinet="product.cab" EmbedCab="yes"/>
+      <Icon Id="ProductIcon" SourceFile="../src/BlueGo/iconBlueGo.ico"/>
+      <Property Id="ARPPRODUCTICON" Value="ProductIcon"/>
+      <Property Id="ARPHELPLINK" Value="http://www.vertexwahn.de"/>
+      <Property Id="ARPURLINFOABOUT" Value="http://www.vertexwahn.de"/>
+      <Property Id="ARPNOREPAIR" Value="1"/>
+      <Property Id="ARPNOMODIFY" Value="1"/>
+      <Upgrade Id="$(var.ProductUpgradeCode)">
+         <UpgradeVersion Minimum="$(var.ProductVersion)" OnlyDetect="yes" Property="NEWERVERSIONDETECTED"/>
+         <UpgradeVersion Minimum="0.0.0" Maximum="$(var.ProductVersion)" IncludeMinimum="yes" IncludeMaximum="no" 
+                         Property="OLDERVERSIONBEINGUPGRADED"/>	  
+      </Upgrade>
+      <Condition Message="A newer version of this software is already installed.">NOT NEWERVERSIONDETECTED</Condition>
+ 
+      <Directory Id="TARGETDIR" Name="SourceDir">
+         <Directory Id="ProgramFilesFolder">
+            <Directory Id="INSTALLDIR" Name="BlueGo0.2.3">
+               <Component Id="ApplicationFiles" Guid="12345678-1234-1234-1234-222222222222">
+				  <File Source="BlueGo/7z.dll"/>
+				  <File Source="BlueGo/7z.exe"/>
+				  <File Source="BlueGo/7-zip.dll"/>
+				  <File Source="BlueGo/applications.xml"/>
+				  <File Source="BlueGo/b2.exe"/>
+				  <File Id="ApplicationFile1" Source="BlueGo/BlueGo.exe"/>
+				  <File Source="BlueGo/build_qt4.8.2_x64_msvc10_2ndstep.txt"/>
+				  <File Source="BlueGo/ICSharpCode.SharpZipLib.dll"/>
+               </Component>
+			   
+			   <Directory Id="INSTALLDIR_qtp1" Name="qt4.8.2vs2012patch">
+					<Component Id="qtpatch1" Guid="12345678-1234-1234-1234-222222222223">
+						<File Id="qtpatch1_hs" Source="BlueGo/qt4.8.2vs2012patch/HashSet.h"/>
+						<File Id="qtpatch1_qmake" Source="BlueGo/qt4.8.2vs2012patch/qmake.conf"/>
+					</Component>	
+				</Directory>
+				
+				 <Directory Id="INSTALLDIR_qtp2" Name="qt4.8.3vs2012patch">
+					<Component Id="qtpatch2" Guid="12345678-1234-1234-1234-222222222224">
+						<File Id="qtpatch2_hs" Source="BlueGo/qt4.8.3vs2012patch/HashSet.h"/>
+						<File Id="qtpatch2_qmake" Source="BlueGo/qt4.8.3vs2012patch/qmake.conf"/>
+					</Component>	
+				</Directory>
+            </Directory>					
+         </Directory>
+ 
+         <Directory Id="ProgramMenuFolder">
+            <Directory Id="ProgramMenuSubfolder" Name="BlueGo">
+               <Component Id="ApplicationShortcuts" Guid="12345678-1234-1234-1234-333333333333">
+                  <Shortcut Id="ApplicationShortcut1" Name="BlueGo" Description="BlueGo" 
+                            Target="[INSTALLDIR]BlueGo.exe" WorkingDirectory="INSTALLDIR"/>
+                  <RegistryValue Root="HKCU" Key="Software\Example Company Name\Example Product Name" 
+                            Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+                  <RemoveFolder Id="ProgramMenuSubfolder" On="uninstall"/>
+               </Component>
+            </Directory>
+         </Directory>
+      </Directory>
+ 
+      <InstallExecuteSequence>
+         <RemoveExistingProducts After="InstallValidate"/>
+      </InstallExecuteSequence>
+ 
+      <Feature Id="DefaultFeature" Level="1">
+         <ComponentRef Id="ApplicationFiles"/>
+		 <ComponentRef Id="qtpatch1"/>
+		 <ComponentRef Id="qtpatch2"/>
+         <ComponentRef Id="ApplicationShortcuts"/>		 
+      </Feature>
+   </Product>
+</Wix>

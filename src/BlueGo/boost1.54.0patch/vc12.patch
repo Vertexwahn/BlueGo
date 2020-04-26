@@ -1,0 +1,244 @@
+Index: boost/config/compiler/visualc.hpp
+===================================================================
+--- boost/config/compiler/visualc.hpp	(revision 84920)
++++ boost/config/compiler/visualc.hpp	(working copy)
+@@ -225,7 +225,7 @@
+ // Because the CTP is unsupported, unrelease, and only alpha quality,
+ // it is only supported if BOOST_MSVC_ENABLE_2012_NOV_CTP is defined.
+ //
+-#if _MSC_FULL_VER < 170051025 || !defined(BOOST_MSVC_ENABLE_2012_NOV_CTP)
++#if _MSC_VER < 1800 && (_MSC_FULL_VER < 170051025 || !defined(BOOST_MSVC_ENABLE_2012_NOV_CTP))
+ #  define BOOST_NO_CXX11_EXPLICIT_CONVERSION_OPERATORS
+ #  define BOOST_NO_CXX11_FUNCTION_TEMPLATE_DEFAULT_ARGS
+ #  define BOOST_NO_CXX11_RAW_LITERALS
+@@ -234,11 +234,14 @@
+ #  define BOOST_NO_CXX11_TRAILING_RESULT_TYPES
+ #endif
+ 
++#if _MSC_VER < 1800
++#  define BOOST_NO_CXX11_DECLTYPE_N3276
++#endif // _MSC_VER < 1800
++
+ // C++11 features not supported by any versions
+ #define BOOST_NO_CXX11_CHAR16_T
+ #define BOOST_NO_CXX11_CHAR32_T
+ #define BOOST_NO_CXX11_CONSTEXPR
+-#define BOOST_NO_CXX11_DECLTYPE_N3276
+ #define BOOST_NO_CXX11_DEFAULTED_FUNCTIONS
+ #define BOOST_NO_CXX11_DELETED_FUNCTIONS
+ #define BOOST_NO_CXX11_NOEXCEPT
+@@ -287,6 +290,8 @@
+ #     define BOOST_COMPILER_VERSION evc10
+ #   elif _MSC_VER < 1800
+ #     define BOOST_COMPILER_VERSION evc11
++#   elif _MSC_VER < 1900
++#     define BOOST_COMPILER_VERSION evc12
+ #   else
+ #      if defined(BOOST_ASSERT_CONFIG)
+ #         error "Unknown EVC++ compiler version - please run the configure tests and report the results"
+@@ -312,6 +317,8 @@
+ #     define BOOST_COMPILER_VERSION 10.0
+ #   elif _MSC_VER < 1800
+ #     define BOOST_COMPILER_VERSION 11.0
++#   elif _MSC_VER < 1900
++#     define BOOST_COMPILER_VERSION 12.0
+ #   else
+ #     define BOOST_COMPILER_VERSION _MSC_VER
+ #   endif
+@@ -321,8 +328,8 @@
+ #endif
+ 
+ //
+-// last known and checked version is 1700 (VC11, aka 2011):
+-#if (_MSC_VER > 1700)
++// last known and checked version is 1800 (VC12, aka 2013):
++#if (_MSC_VER > 1800)
+ #  if defined(BOOST_ASSERT_CONFIG)
+ #     error "Unknown compiler version - please run the configure tests and report the results"
+ #  else
+Index: boost/mpl/assert.hpp
+===================================================================
+--- boost/mpl/assert.hpp	(revision 84920)
++++ boost/mpl/assert.hpp	(working copy)
+@@ -34,7 +34,7 @@
+ #include <boost/config.hpp> // make sure 'size_t' is placed into 'std'
+ #include <cstddef>
+ 
+-#if BOOST_WORKAROUND(BOOST_MSVC, == 1700)
++#if BOOST_WORKAROUND(BOOST_MSVC, >= 1700)
+ #include <boost/mpl/if.hpp>
+ #endif
+ 
+@@ -134,7 +134,7 @@
+ 
+ #endif 
+ 
+-#if BOOST_WORKAROUND(BOOST_MSVC, == 1700)
++#if BOOST_WORKAROUND(BOOST_MSVC, >= 1700)
+ 
+ template<class Pred>
+ struct extract_assert_pred;
+@@ -244,7 +244,7 @@
+ 
+ BOOST_MPL_AUX_ADL_BARRIER_NAMESPACE_CLOSE
+ 
+-#if BOOST_WORKAROUND(BOOST_MSVC, == 1700)
++#if BOOST_WORKAROUND(BOOST_MSVC, >= 1700)
+ 
+ // BOOST_MPL_ASSERT((pred<x,...>))
+ 
+Index: tools/build/v2/engine/build.bat
+===================================================================
+--- tools/build/v2/engine/build.bat	(revision 84920)
++++ tools/build/v2/engine/build.bat	(working copy)
+@@ -28,7 +28,7 @@
+ ECHO ###     .\build.bat msvc
+ ECHO ###
+ ECHO ### Toolsets supported by this script are: borland, como, gcc, gcc-nocygwin,
+-ECHO ###     intel-win32, metrowerks, mingw, msvc, vc7, vc8, vc9, vc10, vc11
++ECHO ###     intel-win32, metrowerks, mingw, msvc, vc7, vc8, vc9, vc10, vc11, vc12
+ ECHO ###
+ call :Set_Error
+ endlocal
+@@ -101,6 +101,16 @@
+ if not errorlevel 1 set ProgramFiles=C:\Program Files
+ 
+ call :Clear_Error
++if NOT "_%VS120COMNTOOLS%_" == "__" (
++    set "BOOST_JAM_TOOLSET=vc12"
++    set "BOOST_JAM_TOOLSET_ROOT=%VS120COMNTOOLS%..\..\VC\"
++    goto :eof)
++call :Clear_Error
++if EXIST "%ProgramFiles%\Microsoft Visual Studio 12.0\VC\VCVARSALL.BAT" (
++    set "BOOST_JAM_TOOLSET=vc12"
++    set "BOOST_JAM_TOOLSET_ROOT=%ProgramFiles%\Microsoft Visual Studio 12.0\VC\"
++    goto :eof)
++call :Clear_Error
+ if NOT "_%VS110COMNTOOLS%_" == "__" (
+     set "BOOST_JAM_TOOLSET=vc11"
+     set "BOOST_JAM_TOOLSET_ROOT=%VS110COMNTOOLS%..\..\VC\"
+@@ -396,6 +406,21 @@
+ set "BOOST_JAM_OPT_YYACC=/Febootstrap\yyacc0"
+ set "_known_=1"
+ :Skip_VC11
++if NOT "_%BOOST_JAM_TOOLSET%_" == "_vc12_" goto Skip_VC12
++if NOT "_%VS120COMNTOOLS%_" == "__" (
++    set "BOOST_JAM_TOOLSET_ROOT=%VS120COMNTOOLS%..\..\VC\"
++    )
++if "_%VCINSTALLDIR%_" == "__" call :Call_If_Exists "%BOOST_JAM_TOOLSET_ROOT%VCVARSALL.BAT" %BOOST_JAM_ARGS%
++if NOT "_%BOOST_JAM_TOOLSET_ROOT%_" == "__" (
++    if "_%VCINSTALLDIR%_" == "__" (
++        set "PATH=%BOOST_JAM_TOOLSET_ROOT%bin;%PATH%"
++        ) )
++set "BOOST_JAM_CC=cl /nologo /RTC1 /Zi /MTd /Fobootstrap/ /Fdbootstrap/ -DNT -DYYDEBUG -wd4996 kernel32.lib advapi32.lib user32.lib"
++set "BOOST_JAM_OPT_JAM=/Febootstrap\jam0"
++set "BOOST_JAM_OPT_MKJAMBASE=/Febootstrap\mkjambase0"
++set "BOOST_JAM_OPT_YYACC=/Febootstrap\yyacc0"
++set "_known_=1"
++:Skip_VC12
+ if NOT "_%BOOST_JAM_TOOLSET%_" == "_borland_" goto Skip_BORLAND
+ if "_%BOOST_JAM_TOOLSET_ROOT%_" == "__" (
+     call :Test_Path bcc32.exe )
+Index: tools/build/v2/engine/build.jam
+===================================================================
+--- tools/build/v2/engine/build.jam	(revision 84920)
++++ tools/build/v2/engine/build.jam	(working copy)
+@@ -377,6 +377,12 @@
+     [ opt --debug : /MTd /DEBUG /Z7 /Od /Ob0 /wd4996 ]
+     -I$(--python-include) -I$(--extra-include)
+     : kernel32.lib advapi32.lib user32.lib $(--python-lib[1]) ;
++toolset vc12 cl : /Fe /Fe /Fd /Fo : -D
++    : /nologo
++    [ opt --release : /GL /MT /O2 /Ob2 /Gy /GF /GA /wd4996 ]
++    [ opt --debug : /MTd /DEBUG /Z7 /Od /Ob0 /wd4996 ]
++    -I$(--python-include) -I$(--extra-include)
++    : kernel32.lib advapi32.lib user32.lib $(--python-lib[1]) ;
+ 
+ # First set the build commands and options according to the
+ # preset toolset.
+Index: tools/build/v2/tools/msvc.jam
+===================================================================
+--- tools/build/v2/tools/msvc.jam	(revision 84920)
++++ tools/build/v2/tools/msvc.jam	(working copy)
+@@ -749,8 +749,12 @@
+             # version from the path.
+             # FIXME: We currently detect both Microsoft Visual Studio 9.0 and
+             # 9.0express as 9.0 here.
+-            if [ MATCH "(Microsoft Visual Studio 11)" : $(command) ]
++            if [ MATCH "(Microsoft Visual Studio 12)" : $(command) ]
+             {
++                version = 12.0 ;
++            }
++            else if [ MATCH "(Microsoft Visual Studio 11)" : $(command) ]
++            {
+                 version = 11.0 ;
+             }
+             else if [ MATCH "(Microsoft Visual Studio 10)" : $(command) ]
+@@ -1385,7 +1389,7 @@
+ 
+ 
+ # Known toolset versions, in order of preference.
+-.known-versions = 11.0 10.0 10.0express 9.0 9.0express 8.0 8.0express 7.1
++.known-versions = 12.0 11.0 10.0 10.0express 9.0 9.0express 8.0 8.0express 7.1
+     7.1toolkit 7.0 6.0 ;
+ 
+ # Version aliases.
+@@ -1396,6 +1400,7 @@
+ .version-alias-9 = 9.0 ;
+ .version-alias-10 = 10.0 ;
+ .version-alias-11 = 11.0 ;
++.version-alias-12 = 12.0 ;
+ 
+ # Names of registry keys containing the Visual C++ installation path (relative
+ # to "HKEY_LOCAL_MACHINE\SOFTWARE\\Microsoft").
+@@ -1409,6 +1414,7 @@
+ .version-10.0-reg = "VisualStudio\\10.0\\Setup\\VC" ;
+ .version-10.0express-reg = "VCExpress\\10.0\\Setup\\VC" ;
+ .version-11.0-reg = "VisualStudio\\11.0\\Setup\\VC" ;
++.version-12.0-reg = "VisualStudio\\12.0\\Setup\\VC" ;
+ 
+ # Visual C++ Toolkit 2003 does not store its installation path in the registry.
+ # The environment variable 'VCToolkitInstallDir' and the default installation
+Index: tools/build/v2/tools/msvc.py
+===================================================================
+--- tools/build/v2/tools/msvc.py	(revision 84920)
++++ tools/build/v2/tools/msvc.py	(working copy)
+@@ -645,9 +645,11 @@
+             # version from the path.
+             # FIXME: We currently detect both Microsoft Visual Studio 9.0 and
+             # 9.0express as 9.0 here.
+-            if re.search("Microsoft Visual Studio 11", command):
++            if re.search("Microsoft Visual Studio 12", command):
++                version = '12.0'
++            elif re.search("Microsoft Visual Studio 11", command):
+                 version = '11.0'
+-            if re.search("Microsoft Visual Studio 10", command):
++            elif re.search("Microsoft Visual Studio 10", command):
+                 version = '10.0'
+             elif re.search("Microsoft Visual Studio 9", command):
+                 version = '9.0'
+@@ -1156,7 +1158,7 @@
+ 
+ 
+ # Known toolset versions, in order of preference.
+-_known_versions = ['11.0', '10.0', '10.0express', '9.0', '9.0express', '8.0', '8.0express', '7.1', '7.1toolkit', '7.0', '6.0']
++_known_versions = ['12.0', '11.0', '10.0', '10.0express', '9.0', '9.0express', '8.0', '8.0express', '7.1', '7.1toolkit', '7.0', '6.0']
+ 
+ # Version aliases.
+ __version_alias_6 = '6.0'
+@@ -1166,6 +1168,7 @@
+ __version_alias_9 = '9.0'
+ __version_alias_10 = '10.0'
+ __version_alias_11 = '11.0'
++__version_alias_12 = '12.0'
+ 
+ # Names of registry keys containing the Visual C++ installation path (relative
+ # to "HKEY_LOCAL_MACHINE\SOFTWARE\\Microsoft").
+@@ -1179,6 +1182,7 @@
+ __version_10_0_reg = "VisualStudio\\10.0\\Setup\\VC"
+ __version_10_0express_reg = "VCExpress\\10.0\\Setup\\VC"
+ __version_11_0_reg = "VisualStudio\\11.0\\Setup\\VC"
++__version_12_0_reg = "VisualStudio\\12.0\\Setup\\VC"
+ 
+ # Visual C++ Toolkit 2003 does not store its installation path in the registry.
+ # The environment variable 'VCToolkitInstallDir' and the default installation

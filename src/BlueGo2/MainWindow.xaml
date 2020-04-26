@@ -1,0 +1,83 @@
+﻿<Window x:Class="BlueGo2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BlueGo2"
+        mc:Ignorable="d"
+        Title="BlueGo2" Height="350" Width="725">
+
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" Background="White" FontFamily="Segoe UI">
+      
+            <MenuItem Header="_File">
+                <MenuItem Header="Preferences" />
+                <Separator />
+                <MenuItem Header="_Exit" Click="MenuItem_Click" />
+            </MenuItem>
+        </Menu>
+
+
+
+        <StackPanel>
+         <StackPanel Margin="10" Orientation="Horizontal" Height="30">
+            <Label x:Name="labelPlatform" Content="Platform"/>
+            <ComboBox>
+                <ComboBoxItem>x86</ComboBoxItem>
+                <ComboBoxItem IsSelected="True">x64</ComboBoxItem>
+            </ComboBox>
+            <Label x:Name="labelCompiler" Content="Compiler"/>
+            <ComboBox Height="30" VerticalAlignment="Top" SelectionChanged="ComboBox_SelectionChanged">
+                <ComboBoxItem>Microsoft Visual Studio 10 2010</ComboBoxItem>
+                <ComboBoxItem>Microsoft Visual Studio 11 2012</ComboBoxItem>
+                <ComboBoxItem>Microsoft Visual Studio 12 2013</ComboBoxItem>
+                <ComboBoxItem>Microsoft Visual Studio 14 2015</ComboBoxItem>
+                    <ComboBoxItem IsSelected="True">Microsoft Visual Studio 15 2017</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+
+        <TabControl TabStripPlacement="Left" Height="246">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Border Name="Border" BorderThickness="0,0,0,0" BorderBrush="Gainsboro" Margin="0,0">
+                                    <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,2"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                            <Setter TargetName="Border" Property="Background" Value="#00AADE" />
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Border" Property="Background" Value="White" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+                <TabItem Header="boost&#xD;&#xA;" FontSize="14.667" FontFamily="Segoe UI" FontStyle="Normal" Height="24" VerticalAlignment="Top">
+
+                    <StackPanel>
+                        <Label x:Name="label" Content="Version"/>
+                        <ComboBox x:Name="comboBox"/>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Install" VerticalAlignment="Top" FontSize="14.667" FontFamily="Segoe UI" FontStyle="Normal">
+                </TabItem>
+           
+            
+        </TabControl>
+    </StackPanel>  
+        
+        
+    </DockPanel>
+
+</Window>
