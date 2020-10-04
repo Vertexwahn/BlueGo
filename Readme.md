@@ -52,9 +52,11 @@ Package manager for CMake (based on ExternalProject) can be found here: <a href=
 ## Videos ##
 
 How to quickly install Boost, QT into Visual Studio 2012 and 2010 for C++ development:
+
 [![How to quickly install Boost, QT into Visual Studio 2012 and 2010 for C++ development](https://img.youtube.com/vi/nxQzXQlhJ2E/0.jpg)](https://www.youtube.com/watch?v=nxQzXQlhJ2E)
 
 Detection of superfluous include files:
+
 [![Detection of superfluous include files](https://img.youtube.com/vi/kAvkTGJq7hM/0.jpg)](https://www.youtube.com/watch?v=kAvkTGJq7hM)
 
 ## License ##
