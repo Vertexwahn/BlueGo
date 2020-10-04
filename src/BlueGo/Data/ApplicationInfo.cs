@@ -38,6 +38,11 @@ namespace BlueGo.Data
         {
             List<ApplicationInfo> list = new List<ApplicationInfo>();
 
+            if(!System.IO.File.Exists(filename))
+            {
+                return list;
+            }
+
             XmlTextReader xmlReader = new XmlTextReader(filename);
            
             XmlDocument xmlDoc = new XmlDocument();
