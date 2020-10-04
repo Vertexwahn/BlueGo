@@ -1,7 +1,7 @@
 BlueGo
 ======
 
-![BlueGo5.png](https://bitbucket.org/repo/Gg9AL5/images/2417218033-BlueGo5.png)
+![Screenshot of BlueGo](screenshots/BlueGo1.png)
 
 `BlueGo` is a tool which builds Boost, Qt and OpenSceneGraph libraries using Visual Studio 2010/12/13. You just have to start the application, select your configuration and hit the Build button- everything else works automatically. The application downloads the library, extracts it and builds it.
 
@@ -48,6 +48,14 @@ Package manager for CMake (based on ExternalProject) can be found here: <a href=
 11. http://www.cpm.rocks/
 
 12. Prebuild boost libraries https://sourceforge.net/projects/boost/files/boost-binaries/
+
+## Videos ##
+
+How to quickly install Boost, QT into Visual Studio 2012 and 2010 for C++ development:
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nxQzXQlhJ2E" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+Detection of superfluous include files:
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kAvkTGJq7hM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## License ##
 
