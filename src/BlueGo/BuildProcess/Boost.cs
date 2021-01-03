@@ -27,6 +27,7 @@ namespace BlueGo
         Boost1_61_0,
         Boost1_62_0,
         Boost1_63_0,
+        Boost1_75_0,
         FromSourceSVN
     }
 
@@ -254,7 +255,6 @@ namespace BlueGo
             {
                 List<string> urls = new List<string>();
                 urls.Add(@"https://netix.dl.sourceforge.net/project/boost/boost/1.63.0/boost_1_63_0.zip");
-                urls.Add(@"https://dl.dropboxusercontent.com/content_link/XCF6E7mw1RFsyyakII4LVbhB7v4y0ocnPTqzOTTuZM6SIkXuFkWBuc2exlXquuPo/file?dl=1");
 
                 BoostInfo biBoost1_63_0 = new BoostInfo(
                     "boost_1_63_0.zip",
@@ -263,6 +263,19 @@ namespace BlueGo
                 );
 
                 list.Add(biBoost1_63_0);
+            }
+
+            {
+                List<string> urls = new List<string>();
+                urls.Add(@"https://netix.dl.sourceforge.net/project/boost/boost/1.75.0/boost_1_75_0.zip");
+
+                BoostInfo biBoos1_75_0 = new BoostInfo(
+                    "boost_1_63_0.zip",
+                    urls,
+                    eBoostVersion.Boost1_75_0
+                );
+
+                list.Add(biBoos1_75_0);
             }
 
             return list;
@@ -300,6 +313,8 @@ namespace BlueGo
                     return "1.62.0";
                 case eBoostVersion.Boost1_63_0:
                     return "1.63.0";
+                case eBoostVersion.Boost1_75_0:
+                    return "1.75.0";
                 case eBoostVersion.FromSourceSVN:
                     return "From Source (SVN)";
             }
