@@ -49,7 +49,7 @@ Package manager for CMake (based on ExternalProject) can be found here: <a href=
 
 12. Prebuild boost libraries https://sourceforge.net/projects/boost/files/boost-binaries/
 
-13. *Use [Bazel](https://bazel.build/)*. There are rules for [Boost](https://github.com/nelhage/rules_boost), [Qt](https://github.com/Vertexwahn/rules_qt6) and almost everything else you will need. I switched completely to Bazel and will never look back ;).
+13. **Use [Bazel](https://bazel.build/)**. There are rules for [Boost](https://github.com/nelhage/rules_boost), [Qt](https://github.com/Vertexwahn/rules_qt6) and almost everything else you will need. I switched completely to Bazel and will never look back ;).
 
 ## Videos ##
 
